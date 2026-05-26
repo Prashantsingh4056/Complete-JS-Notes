@@ -50,3 +50,31 @@ console.log(typeof heroes);  // object
 // Study here : 
 // https://262.ecma-international.org/5.1/#sec-11.4.3
 
+
+// ____________________________Memory__________________________
+
+// Stack(Primitive) , Heap(Non-Primitive)
+
+// when stack memory is used , we get the copy of variable created
+// when Heap memory is used , we get its reference 
+
+let myYoutubename = "PrashantSinghdotcom"
+
+let anothername = myYoutubename
+anothername = "prashant__Singh"
+
+console.log(myYoutubename); // PrashantSinghdotcom
+console.log(anothername); // prashant__Singh
+
+let userOne = {
+    email: "user@google.com",
+    upi: "user@ybl"
+}
+
+let userTwo = userOne
+
+userTwo.email = "Prashant@google.com"
+
+console.log(userOne.email);  // Prashant@google.com
+console.log(userTwo.email);  // Prashant@google.com
+
