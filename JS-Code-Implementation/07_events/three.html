@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button{
+            background-color: green;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            color: white;
+            margin-right: 10px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: 20px;
+        }
+
+        #stop{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chai aur javascript</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    const sayDate = function(str){
+        console.log(str , Date.now());
+    }
+
+    let interval;
+    let isStarted = false;
+
+    function startOrStop(s){
+
+        if(s === "start" && !isStarted){
+            interval = setInterval(sayDate , 1000 , "Hi")
+
+            isStarted = true;
+        } 
+
+        else if(s === "stop" && isStarted){
+
+            clearInterval(interval)
+            isStarted = false;
+        }
+         
+
+    }
+
+    document.getElementById("start").addEventListener("click" , function(){
+        startOrStop("start")
+    });
+
+    document.getElementById("stop").addEventListener("click" , function(){
+        startOrStop("stop")
+
+    });
+
+    
+
+
+</script>
+</html>

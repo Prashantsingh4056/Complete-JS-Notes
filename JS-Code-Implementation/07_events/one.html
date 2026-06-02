@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>htnml Events </title>
+    <title>html Events </title>
 </head>
 <body style="background-color: #414141; color: aliceblue;">
     <h2>Amazing image</h2>
@@ -44,25 +44,25 @@
     // } , false)
 
 
-    // ---------------------------------------------- Bubbling ---------------------------------------------------
+    // --------------------------------------- Event Bubbling ---------------------------------------------------
 
-    document.getElementById('images').addEventListener("click" , function(e){
+    // document.getElementById('images').addEventListener("click" , function(e){
         
-        console.log("clicked inside the ul");
-        // clicked inside the ul
+    //     console.log("clicked inside the ul");
+    //     // clicked inside the ul
         
-    } , false )
+    // } , false )
 
     
-    document.getElementById('owl').addEventListener("click" , function(e){
+    // document.getElementById('owl').addEventListener("click" , function(e){
         
-        console.log("owl clicked");  
-        // owl clicked
-        //clicked inside the ul     // (This is called event Propagation or bubbling)
+    //     console.log("owl clicked");  
+    //     // owl clicked
+    //     //clicked inside the ul     // (This is called event Propagation or bubbling)
         
-    } , false)
+    // } , false)
 
-    // ---------------------------------------------- Capturing -------------------------------------------------------
+    // -------------------------------------- Event Capturing -------------------------------------------------------
 
     // document.getElementById('images').addEventListener("click" , function(e){
         
@@ -72,7 +72,6 @@
     // } , true)
 
 
-    // CAPTURING
     // document.getElementById('owl').addEventListener("click" , function(e){
         
     //     console.log("owl clicked");  
@@ -81,6 +80,52 @@
         
     // } , true)
 
+    
+    // To stop this behaviour , use stopProgation()
+    // document.getElementById('owl').addEventListener("click" , function(e){
+        
+    //     console.log("owl clicked");   // owl clicked
+    //     // clicked inside the ul
+    //     // owl clicked     // capturing 
+    //     e.stopPropagation()
+        
+    // } , false)
+
+    // changing the default behaviour of <a></a> tag or preventing default behaviour
+    // document.getElementById("google").addEventListener("click" , function(e){
+
+    //     e.preventDefault();
+    //     e.stopPropagation();
+
+    //     console.log("google clicked");  // google clicked
+        
+    // } , false)
+
+
+    // code to delete the image when Clicked 
+    document.querySelector("#images").addEventListener("click" , function(e){
+
+
+        // console.log(e.target);  <img/>
+        console.log(e.target.parentNode);  // <li>...</li>
+        let removeIt = e.target.parentNode  // <li>...</li>
+
+        // Method 1
+        // document.querySelector("#images").removeChild(removeIt)
+
+        // Method 2
+        // removeIt.remove()
+
+        // Method 3
+        // removeIt.parentNode.removeChild(removeIt) // if clicked on <li> element , whole image container will be removed !!
+
+        // To prevent this behaviour
+        if(e.target.tagName === "IMG"){
+            let removeIt = e.target.parentNode
+            removeIt.parentNode.removeChild(removeIt)
+        }
+         
+    } , false)
 
 </script>
 </html>
