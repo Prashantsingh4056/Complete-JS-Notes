@@ -1,0 +1,66 @@
+<!-- XMLHttpRequest -->
+ <!-- Ajax -->
+
+<!-- Asynchronous JavaScript and XML (Ajax, or AJAX) is a web development 
+ technique in which a web app fetches content from the server by making 
+ asynchronous HTTP requests, and uses the new content to update the relevant 
+ parts of the page without requiring a full page load. This can make the page more 
+ responsive, because only the parts that need to be updated are requested. -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+
+    <!-- XMLHttpRequest: readyState property -->
+
+    <!-- The XMLHttpRequest.readyState property returns the state an XMLHttpRequest client is in. An XHR client exists in one of the following states: -->
+
+    <!--
+    Value	 State	             Description
+
+    0	     UNSENT	            Client has been created. open() not called yet.
+
+    1	     OPENED	            open() has been called.
+
+    2	     HEADERS_RECEIVED	send() has been called, and headers and status are available.
+
+    3	     LOADING	        Downloading; responseText holds partial data.
+
+    4	     DONE	            The operation is complete. -->
+    
+ </body>
+ <script>
+    const requestUrl = "https://api.github.com/users/prashantsingh4056"
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET" , requestUrl);
+    xhr.onreadystatechange = function(){
+        console.log(xhr.readyState);
+        if(xhr.readyState === 4){
+            // console.log(xhr.response);
+
+            const data = this.responseText;  // responseText is a string
+
+            // to convert it into an object we use JSON.parse()
+            const objData = JSON.parse(data);
+            console.log(typeof data); // string
+            console.log(typeof objData); // object
+
+            console.log(objData.followers);  // to access followers property of the object
+            console.log(this.responseText);
+        }
+    }
+
+    xhr.send();
+
+    // v8 engine provides developer tools in the browser which can be used to test the API request and response
+    // we can also use fetch API to make API requests which is more modern and easier to use than XMLHttpRequest
+    // console.log() is given by v8 engine to print the output in the console of the browser
+
+     
+ </script>
+ </html>
