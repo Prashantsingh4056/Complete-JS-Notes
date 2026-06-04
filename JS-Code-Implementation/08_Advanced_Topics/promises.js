@@ -150,7 +150,7 @@ getAllUsers()  // output : Array of user objects from the API when the fetch is 
 // Writing the above function wuth .then() and .catch() method
 
 function getAllUsersWithThen(){
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch("https://jsonplaceholder.typicode.com/users")  // we use .then() because fetch() returns a promise
     .then(function(response){
         return response.json()  // we need to return the promise returned by response.json() to chain the next then block
     })
@@ -169,5 +169,32 @@ getAllUsersWithThen() // output : Array of user objects from the API when the fe
 
 // ---------------------------------------------
 
-// Question : Why the Api data is prited before the "Asynchronous task is completed" message in the console?
+// Question : Why is API data printed before "Asynchronous task is completed"?
 
+// fetch() returns a Promise. Promise callbacks (then, catch, finally) are placed in the Microtask Queue, 
+// while setTimeout callbacks are placed in the Callback Queue. The Event Loop always processes
+//  the Microtask Queue completely before taking tasks from the Callback Queue. 
+// Therefore, the fetch result is often printed before the setTimeout callback,
+//  even when both are asynchronous.
+
+
+//  Read this => https://blog.logrocket.com/fetch-api-node-js/#evolution-http-requests
+
+// Important Interview Question: 
+// when we get error code 404 from fetch() promise , will it be found on resolve or reject block?
+
+// Answer : It will be found in the resolve block because fetch() 
+// promise only rejects when there is a network error or if the request 
+// is blocked by CORS policy. It does not reject for HTTP error status 
+// codes like 404 or 500. Instead, it resolves with a response object that
+//  has an ok property set to false and a status property set to the HTTP
+//  status code. Therefore, we need to check the response.ok property to 
+// handle HTTP errors properly.
+
+
+// Impotant 
+// The `fetch()` method of the Window interface starts the process of fetching 
+// a resource from the network, returning a promise that is fulfilled once the
+//  response is available.
+// The promise resolves to the Response object representing the response to your request.
+// A fetch() promise only rejects when the request fails, for example, because of a badly-formed request URL or a network error. A fetch() promise does not reject if the server responds with HTTP status codes that indicate errors (404, 504, etc.). Instead, a then() handler must check the Response.ok and/or Response.status properties.
